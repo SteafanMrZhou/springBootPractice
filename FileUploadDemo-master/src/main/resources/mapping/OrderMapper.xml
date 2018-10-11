@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.autumn.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.autumn.model.Order" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_number" property="orderNumber" jdbcType="INTEGER" />
+    <result column="order_name" property="orderName" jdbcType="VARCHAR" />
+    <result column="order_total" property="orderTotal" jdbcType="INTEGER" />
+    <result column="order_owner" property="orderOwner" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, order_number, order_name, order_total, order_owner
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderInfo
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orderInfo
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.autumn.model.Order" >
+    insert into orderInfo (id, order_number, order_name, 
+      order_total, order_owner)
+    values (#{id,jdbcType=INTEGER}, #{orderNumber,jdbcType=INTEGER}, #{orderName,jdbcType=VARCHAR}, 
+      #{orderTotal,jdbcType=INTEGER}, #{orderOwner,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.autumn.model.Order" >
+    insert into orderInfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderNumber != null" >
+        order_number,
+      </if>
+      <if test="orderName != null" >
+        order_name,
+      </if>
+      <if test="orderTotal != null" >
+        order_total,
+      </if>
+      <if test="orderOwner != null" >
+        order_owner,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNumber != null" >
+        #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderName != null" >
+        #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTotal != null" >
+        #{orderTotal,jdbcType=INTEGER},
+      </if>
+      <if test="orderOwner != null" >
+        #{orderOwner,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.autumn.model.Order" >
+    update orderInfo
+    <set >
+      <if test="orderNumber != null" >
+        order_number = #{orderNumber,jdbcType=INTEGER},
+      </if>
+      <if test="orderName != null" >
+        order_name = #{orderName,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTotal != null" >
+        order_total = #{orderTotal,jdbcType=INTEGER},
+      </if>
+      <if test="orderOwner != null" >
+        order_owner = #{orderOwner,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.autumn.model.Order" >
+    update orderInfo
+    set order_number = #{orderNumber,jdbcType=INTEGER},
+      order_name = #{orderName,jdbcType=VARCHAR},
+      order_total = #{orderTotal,jdbcType=INTEGER},
+      order_owner = #{orderOwner,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

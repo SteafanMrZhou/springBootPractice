@@ -1,4 +1,4 @@
-# springBootPractice
+# springBootPractice-ImgeUpload
 使用SpringBoot+MyBatis+MySql实现的图片上传功能
 主要功能：
 可以将图片上传到本地，也可以上传到服务器，在上传图片时，会显示将要上传图片的缩略图，数据库中存储了图片上传的上传地址，可以直接拿来访问
